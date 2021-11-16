@@ -14,6 +14,7 @@ using SampleAspNetCore2ApplicationNETFramework.Services;
 using Sustainsys.Saml2;
 using Sustainsys.Saml2.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Extensions.Hosting;
 
 namespace SampleAspNetCore2ApplicationNETFramework
 {
@@ -53,7 +54,7 @@ namespace SampleAspNetCore2ApplicationNETFramework
                     options.SPOptions.EntityId = new EntityId("https://localhost:44342/Saml2");
                     options.IdentityProviders.Add(
                         new IdentityProvider(
-                            new EntityId("https://localhost:44300/Metadata"), options.SPOptions)
+                            new EntityId("https://login.microsoftonline.com/e0b26355-1889-40d8-8ef1-e559616befda/saml2"), options.SPOptions)
                         {
                             LoadMetadata = true
                         });
@@ -63,7 +64,7 @@ namespace SampleAspNetCore2ApplicationNETFramework
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,16 +75,17 @@ namespace SampleAspNetCore2ApplicationNETFramework
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseRouting();
             app.UseAuthentication();
-
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
