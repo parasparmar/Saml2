@@ -48,13 +48,19 @@ namespace SampleAspNetCore2ApplicationNETFramework
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
 
+            /*  EKG_ADDS_NGC_DEV
+             *  Application (client) ID 2046e1b5-fd9a-4fd0-9eb8-14333bc53a90
+                Directory (tenant) ID e0b26355-1889-40d8-8ef1-e559616befda
+            */
             services.AddAuthentication()
-                .AddSaml2(options => 
+                .AddSaml2(options =>
                 {
-                    options.SPOptions.EntityId = new EntityId("https://localhost:44342/Saml2");
+                    options.SPOptions.EntityId = new EntityId("EKG_ADDS_NGC_DEV");
+                    options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com");
+
                     options.IdentityProviders.Add(
                         new IdentityProvider(
-                            new EntityId("https://login.microsoftonline.com/e0b26355-1889-40d8-8ef1-e559616befda/saml2"), options.SPOptions)
+                            new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/Saml2"), options.SPOptions)
                         {
                             LoadMetadata = true
                         });
