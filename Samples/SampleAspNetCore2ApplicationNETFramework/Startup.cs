@@ -55,14 +55,16 @@ namespace SampleAspNetCore2ApplicationNETFramework
             services.AddAuthentication()
                 .AddSaml2(options =>
                 {
-                    options.SPOptions.EntityId = new EntityId("_cb630355-028b-4de8-be8f-a594279f68ec");
+                    options.SPOptions.EntityId = new EntityId("2046e1b5-fd9a-4fd0-9eb8-14333bc53a90");
                     options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com");
-
                     options.IdentityProviders.Add(
                         new IdentityProvider(
                             new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/"), options.SPOptions)
                         {
-                            LoadMetadata = true
+                            LoadMetadata = true,
+                            MetadataLocation = "https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/FederationMetadata/2007-06/FederationMetadata.xml/",
+                            AllowUnsolicitedAuthnResponse = true,
+                            SingleSignOnServiceUrl = new Uri("https://login.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/saml2")
                         });
 
                     options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
