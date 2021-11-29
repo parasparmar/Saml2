@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account.Manage
+namespace TrySAML.Pages.Account.Manage
 {
     public static class ManageNavPages
     {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SampleAspNetCore2ApplicationNETFramework.Data;
+using TrySAML.Data;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account
+namespace TrySAML.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

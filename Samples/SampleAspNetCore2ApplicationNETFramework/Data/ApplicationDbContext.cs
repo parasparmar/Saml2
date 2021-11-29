@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Data
+namespace TrySAML.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SampleAspNetCore2ApplicationNETFramework.Data;
-using SampleAspNetCore2ApplicationNETFramework.Services;
+using TrySAML.Data;
+using TrySAML.Services;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account.Manage
+namespace TrySAML.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {

@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SampleAspNetCore2ApplicationNETFramework.Data;
-using SampleAspNetCore2ApplicationNETFramework.Services;
+using TrySAML.Data;
+using TrySAML.Services;
 using Sustainsys.Saml2;
 using Sustainsys.Saml2.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Hosting;
 
-namespace SampleAspNetCore2ApplicationNETFramework
+namespace TrySAML
 {
     public class Startup
     {
@@ -55,8 +55,8 @@ namespace SampleAspNetCore2ApplicationNETFramework
             services.AddAuthentication()
                 .AddSaml2(options =>
                 {
-                    options.SPOptions.EntityId = new EntityId("2046e1b5-fd9a-4fd0-9eb8-14333bc53a90");
-                    options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com");
+                    options.SPOptions.EntityId = new EntityId("https://acsdev.kalelogistics.com/");
+                    options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com/");
                     options.IdentityProviders.Add(
                         new IdentityProvider(
                             new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/"), options.SPOptions)

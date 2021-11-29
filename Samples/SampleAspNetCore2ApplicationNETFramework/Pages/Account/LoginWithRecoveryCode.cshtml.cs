@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using SampleAspNetCore2ApplicationNETFramework.Data;
+using TrySAML.Data;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account
+namespace TrySAML.Pages.Account
 {
     public class LoginWithRecoveryCodeModel : PageModel
     {

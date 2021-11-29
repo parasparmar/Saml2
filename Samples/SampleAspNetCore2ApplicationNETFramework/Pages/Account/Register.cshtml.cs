@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using SampleAspNetCore2ApplicationNETFramework.Data;
-using SampleAspNetCore2ApplicationNETFramework.Services;
+using TrySAML.Data;
+using TrySAML.Services;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account
+namespace TrySAML.Pages.Account
 {
     public class RegisterModel : PageModel
     {

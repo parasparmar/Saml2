@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using SampleAspNetCore2ApplicationNETFramework.Services;
+using TrySAML.Services;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Services
+namespace TrySAML.Services
 {
     public static class EmailSenderExtensions
     {

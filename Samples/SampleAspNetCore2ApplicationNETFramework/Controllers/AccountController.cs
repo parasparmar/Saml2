@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SampleAspNetCore2ApplicationNETFramework.Data;
+using TrySAML.Data;
 using Sustainsys.Saml2.AspNetCore2;
 
-namespace SampleAspNetCore2ApplicationNETFramework.Controllers
+namespace TrySAML.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller
