@@ -55,12 +55,12 @@ namespace SampleAspNetCore2ApplicationNETFramework
             services.AddAuthentication()
                 .AddSaml2(options =>
                 {
-                    options.SPOptions.EntityId = new EntityId("EKG_ADDS_NGC_DEV");
+                    options.SPOptions.EntityId = new EntityId("_cb630355-028b-4de8-be8f-a594279f68ec");
                     options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com");
 
                     options.IdentityProviders.Add(
                         new IdentityProvider(
-                            new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/Saml2"), options.SPOptions)
+                            new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/"), options.SPOptions)
                         {
                             LoadMetadata = true
                         });
