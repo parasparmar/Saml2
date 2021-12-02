@@ -48,29 +48,34 @@ namespace TrySAML
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
 
+            
+            ConfigureSaml2Authentication(services);
+        }
+
+        private void ConfigureSaml2Authentication(IServiceCollection services)
+        {
             /*  EKG_ADDS_NGC_DEV
              *  Application (client) ID 2046e1b5-fd9a-4fd0-9eb8-14333bc53a90
                 Directory (tenant) ID e0b26355-1889-40d8-8ef1-e559616befda
             */
+            var config = Configuration.GetSection("Saml2").GetSection("ServiceProviderOptions");
             services.AddAuthentication()
                 .AddSaml2(options =>
-                {
-                    options.SPOptions.EntityId = new EntityId("https://acsdev.kalelogistics.com/");
-                    options.SPOptions.ReturnUrl = new Uri("https://acsdevapi.kalelogistics.com/");
-                    options.SPOptions.WantAssertionsSigned=true;
-                    
+                {                    
+                    options.SPOptions.EntityId = new EntityId(config.GetValue<string>("EntityId"));
+                    options.SPOptions.ReturnUrl = new Uri(config.GetValue<string>("ReturnUrl"));
+                    options.SPOptions.WantAssertionsSigned = true;
+                    options.SPOptions.ServiceCertificates.Add(new X509Certificate2(config.GetValue<string>("ServiceCertificates"), config.GetValue<string>("ServiceCertificatesPassword")));
+                    config = Configuration.GetSection("Saml2").GetSection("IdentityProviders");
                     options.IdentityProviders.Add(
                         new IdentityProvider(
-                            new EntityId("https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/"), options.SPOptions)
+                            new EntityId(config.GetValue<string>("EntityId")), options.SPOptions)
                         {
                             LoadMetadata = true,
-                            MetadataLocation = "https://sts.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/FederationMetadata/2007-06/FederationMetadata.xml/",
+                            MetadataLocation = config.GetValue<string>("MetadataLocation"),
                             AllowUnsolicitedAuthnResponse = true,
-                            SingleSignOnServiceUrl = new Uri("https://login.windows.net/e0b26355-1889-40d8-8ef1-e559616befda/saml2"),
-                            
+                            SingleSignOnServiceUrl = new Uri(config.GetValue<string>("SingleSignOnServiceUrl")),
                         });
-
-                    options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
                 });
         }
 
