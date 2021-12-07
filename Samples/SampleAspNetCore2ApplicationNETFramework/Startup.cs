@@ -66,6 +66,8 @@ namespace TrySAML
                     options.SPOptions.ReturnUrl = new Uri(config.GetValue<string>("ReturnUrl"));
                     options.SPOptions.WantAssertionsSigned = true;
                     options.SPOptions.ServiceCertificates.Add(new X509Certificate2(config.GetValue<string>("ServiceCertificates"), config.GetValue<string>("ServiceCertificatesPassword")));
+                    options.SPOptions.ModulePath= config.GetValue<string>("ModulePath");
+                    
                     config = Configuration.GetSection("Saml2").GetSection("IdentityProviders");
                     options.IdentityProviders.Add(
                         new IdentityProvider(

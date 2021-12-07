@@ -3,80 +3,172 @@
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = null;
 }
 
-<h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in with SSO @provider.DisplayName account">Log in with SSO @provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
+
 
 @section Scripts {
     @await  Html.PartialAsync("_ValidationScriptsPartial")
 }
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="~/img/favicon.ico">
+    <link rel="icon" href="~/img/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="~/img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>ACS</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/vendors/materialdesign-webfont/css/materialdesignicons.min.css">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <main class="container-fluid p-0">
+        <div class="row min-vh-100 row-eq-height g-0">
+            <div class="col-md-6 d-none d-md-block login-img">
+            </div>
+            <div class="col-md-6 bg-light-blue">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="bg-main-blue">
+                            <div class="row g-0">
+                                <div class="col-md-12">
+                                    <div class="text-end p-3">
+                                        <label for="" class="text-white">Language</label>
+                                        <select name="" id="langChanger" class="lang-opt me-2">
+                                            <option value="EN">EN</option>
+                                            <option value="AR">AR</option>
+                                            <option value="SP">SP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-12 text-center">
+                                    <img src="dist/img/dnata-acs-combo.png" alt="">
+                                    <h1 class="text-yellow fs-24 p-3">Signin to your account</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div class="pt-4 pb-4">
+                            <div class="d-flex justify-content-center login-box-width">
+                                <form action="" method="post">
+                                    <div class="form-group">
+
+                                        <div class="input-field my-3 mb-4 d-flex">
+                                            <span class="fas fa-user p-2"></span>
+                                            <input asp-for="Input.Email" type="text" placeholder="Username or Email" required class="form-control">
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="input-field mb-1 d-flex">
+                                            <span class="fas fa-lock p-2"></span>
+                                            <input asp-for="Input.Password" type="password" placeholder="Password" required class="form-control" id="">
+                                            <button type="button" class="toggle-eye"> <span class="fas fa-eye-slash"></span> </button>
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+                                        <div class="d-sm-flex align-items-sm-center justify-content-end p-2">
+                                            <small><a asp-page="./ForgotPassword" class="text-dark">Forgot password?</a></small>
+                                        </div>
+                                        <div class="d-sm-flex align-items-sm-center justify-content-sm-between">
+                                            <div class="d-flex align-items-center">
+                                                <label>
+                                                    <small class="text-light-white">@Html.DisplayNameFor(m => m.Input.RememberMe)</small> &nbsp;
+                                                    <input asp-for="Input.RememberMe" type="checkbox" checked>
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+                                        <p class="pt-2 pb-2"><small>By signing in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</small></p>
+                                        <div class="p-2">
+
+                                            <button type="submit" class="btn btn-secondary">Sign In</button>
+                                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-primary ms-4">Sign Up</a>
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    @{
+                                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                        {
+                                            <div class="p-2">
+                                                <p>
+                                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                                </p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                <div class="p-2">
+                                                    <p>
+                                                        @foreach (var provider in Model.ExternalLogins)
+                                                        {
+                                                            <button type="submit" class="btn btn-secondary" name="provider" value="@provider.Name" title="Sign In in With SSO from @provider.DisplayName account">Log in with SSO @provider.DisplayName</button>
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        }
+                                    }
+                                </form>
+                            </div>
+                            <div class="p-4">
+                                <img src="dist/img/powered-by.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="dist/js/jquery-3.6.0.js"></script>
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#show-sidebar').on('click', function () {
+                $('#sidebar-menu').toggleClass('active-menu');
+            });
+
+            function changeLanguage(rtlLang) {
+                if (rtlLang == 'AR') {
+                    var linkStr;
+                    $("head link").each(function (index) {
+                        linkStr = $(this).attr('href');
+                        linkStr = linkStr.replace(/\.css$/, '-rtl.css');
+                        $(this).attr('href', linkStr);
+                    });
+                }
+                else {
+                    $("head link").each(function (index) {
+                        linkStr = $(this).attr('href');
+                        linkStr = linkStr.replace(/\-rtl.css$/, '.css');
+                        $(this).attr('href', linkStr);
+                    });
+                }
+            }
+
+            changeLanguage($("#langChanger").val());
+
+            $("#langChanger").change(function () {
+                alert($(this).val());
+                changeLanguage(this.value);
+            });
+
+        });
+    </script>
+    <script>
+    </script>
+</body>
+</html>

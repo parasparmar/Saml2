@@ -39,7 +39,7 @@ namespace TrySAML.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(AllowEmptyStrings =true)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
