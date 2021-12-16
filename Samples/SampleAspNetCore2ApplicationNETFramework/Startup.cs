@@ -77,6 +77,8 @@ namespace TrySAML
                             MetadataLocation = config.GetValue<string>("MetadataLocation"),
                             AllowUnsolicitedAuthnResponse = true,
                             SingleSignOnServiceUrl = new Uri(config.GetValue<string>("SingleSignOnServiceUrl")),
+                            RelayStateUsedAsReturnUrl = true,
+
                         });
                 });
         }
